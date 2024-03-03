@@ -67,7 +67,6 @@ function editTask(taskParagraph, homeworkRecord) {
         homeworkRecord.removeChild(taskInput);
         homeworkRecord.removeChild(saveButton);
     });
-    
     homeworkRecord.appendChild(saveButton);
 }
 
