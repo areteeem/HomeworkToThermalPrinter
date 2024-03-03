@@ -10,6 +10,11 @@ function submitHomework() {
     form.reset();
 }
 
+function removeTask(taskElement) {
+    var homeworkRecord = taskElement.closest('.homework-record');
+    homeworkRecord.remove();
+}
+
 function displayHomework(classInput, taskInput) {
     var outputDiv = document.getElementById('output');
     if (!outputDiv) {
@@ -32,52 +37,58 @@ function displayHomework(classInput, taskInput) {
 
     var classParagraph = document.createElement('p');
     classParagraph.classList.add('class-description');
-    classParagraph.textContent = 'Class: ' + classInput;
+    classParagraph.innerHTML = '<span class="bold-text">Class:</span> ' + classInput;
 
     var taskParagraph = document.createElement('p');
     taskParagraph.classList.add('task-description');
     taskParagraph.textContent = taskInput;
 
-    var editButton = document.createElement('button');
-    editButton.textContent = 'Edit Task';
-    editButton.addEventListener('click', function() {
-        editTask(taskParagraph, homeworkRecord);
-    });
+    var tickPlaceholder = document.createElement('span');
+    tickPlaceholder.classList.add('square-placeholder');
+    var taskContainer = document.createElement('div');
+    taskContainer.classList.add('task-container');
+    taskContainer.appendChild(tickPlaceholder); // Add square placeholder
+    taskContainer.appendChild(taskParagraph); // Add task description
+
+    var removeButton = document.createElement('button');
+    removeButton.innerHTML = '&#10005;'; // Cross symbol
+    removeButton.classList.add('remove-button');
+    removeButton.onclick = function() {
+        removeTask(this);
+    };
 
     homeworkRecord.appendChild(classParagraph);
-    homeworkRecord.appendChild(taskParagraph);
-    homeworkRecord.appendChild(editButton);
+    homeworkRecord.appendChild(taskContainer); // Add task container to homework record
+    homeworkRecord.appendChild(removeButton); // Add remove button to homework record
 
     outputDiv.appendChild(homeworkRecord);
 }
 
-function editTask(taskParagraph, homeworkRecord) {
-    var taskText = taskParagraph.textContent;
-    var taskInput = document.createElement('input');
-    taskInput.type = 'text';
-    taskInput.classList.add('editable-task');
-    taskInput.value = taskText;
-    taskParagraph.textContent = '';
-    taskParagraph.appendChild(taskInput);
-    
-    var saveButton = document.createElement('button');
-    saveButton.textContent = 'Save';
-    saveButton.addEventListener('click', function() {
-        taskParagraph.textContent = taskInput.value;
-        homeworkRecord.removeChild(taskInput);
-        homeworkRecord.removeChild(saveButton);
-    });
-    homeworkRecord.appendChild(saveButton);
-}
-
 function printHomeworkList() {
+    var homeworkRecords = document.querySelectorAll('.homework-record');
+
     var printWindow = window.open('', '_blank');
-    var homeworkListContent = document.getElementById('output').innerHTML;
-    printWindow.document.write('<html><head><title>Homework List</title></head><body>');
-    printWindow.document.write('<h2>Homework List</h2>');
-    printWindow.document.write('<div>' + homeworkListContent + '</div>');
-    printWindow.document.write('<style>.editable-task { display: none; }</style>');
-    printWindow.document.write('</body></html>');
+    var printContent = '<html><head><title>Homework List</title>';
+    printContent += '<link rel="stylesheet" href="styles.css">'; // Include CSS file for print styling
+    printContent += '</head><body>';
+    printContent += '<h2>Homework List</h2>';
+
+    homeworkRecords.forEach(function(record) {
+        var classDescription = record.querySelector('.class-description');
+        classDescription.style.fontWeight = 'bold';
+
+        var tickPlaceholder = record.querySelector('.square-placeholder');
+        tickPlaceholder.style.display = 'inline-block'; // Display square placeholder
+
+        var removeButton = record.querySelector('.remove-button');
+        removeButton.style.display = 'none'; // Hide remove button on print page
+
+        printContent += '<div>' + record.innerHTML + '</div>'; // Add record content
+    });
+
+    printContent += '</body></html>';
+
+    printWindow.document.write(printContent);
     printWindow.document.close();
     printWindow.print();
 }

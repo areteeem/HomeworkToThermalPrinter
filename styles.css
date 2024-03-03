@@ -44,6 +44,7 @@ button {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin-bottom: 10px;
 }
 
 button:hover {
@@ -62,20 +63,85 @@ button:hover {
     background-color: #f8f9fa;
 }
 
+.class-description {
+    font-weight: bold;
+}
+
+.task-container {
+    display: flex;
+    align-items: center;
+}
+
 .task-description {
-    margin-bottom: 5px;
+    flex: 1;
+    margin-right: 10px;
 }
 
-.editable-task {
+.square-placeholder {
     display: inline-block;
-    width: calc(100% - 10px);
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    width: 10px;
+    height: 10px;
+    border: 1px solid black;
+    margin-right: 5px; /* Adjust spacing */
 }
 
+.remove-button {
+    padding: 0;
+    width: auto;
+    background-color: transparent;
+    color: #dc3545;
+    border: none;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.remove-button:hover {
+    color: #c82333;
+}
+
+/* Styles for print page */
 @media print {
-    .editable-task {
-        display: none;
+    body {
+        font-size: 12px; /* Adjust font size for print */
+    }
+
+    .homework-record {
+        margin-bottom: 5px; /* Reduce margin between records */
+    }
+
+    .task-container {
+        display: flex;
+        align-items: center;
+    }
+
+    .task-description {
+        flex: 1;
+        margin-right: 10px;
+    }
+
+    .square-placeholder {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border: 1px solid black;
+        margin-right: 5px; /* Adjust spacing */
+    }
+
+    .remove-button {
+        padding: 0;
+        width: auto;
+        background-color: transparent;
+        color: #dc3545;
+        border: none;
+        cursor: pointer;
+        transition: color 0.3s ease;
+        position: absolute;
+        top: 50%;
+        right: 10px; /* Adjust the right position */
+        transform: translateY(-50%);
+    }
+
+    .remove-button:hover {
+        color: #c82333;
     }
 }
