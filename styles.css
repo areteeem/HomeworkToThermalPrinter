@@ -1,5 +1,3 @@
-/* CSS styles */
-
 /* Reset default margin and padding */
 * {
     margin: 0;
@@ -75,7 +73,7 @@ button:hover {
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #f8f9fa;
-    position: relative; /* Add position relative for absolute positioning */
+    position: relative;
 }
 
 .class-description {
@@ -83,14 +81,14 @@ button:hover {
 }
 
 .task-container {
-    position: relative; /* Add position relative for absolute positioning */
+    position: relative;
     display: flex;
     align-items: center;
 }
 
 .task-description {
     flex: 1;
-    margin-right: 40px; /* Increase right margin for the remove button */
+    margin-right: 40px; 
 }
 
 .square-placeholder {
@@ -98,12 +96,12 @@ button:hover {
     width: 10px;
     height: 10px;
     border: 1px solid black;
-    margin-right: 5px; /* Adjust spacing */
+    margin-right: 5px;
 }
 
 .square-placeholder:hover {
-    padding: 5px; /* Increase padding for hover effect */
-    background-color: #ddd; /* Change background color for hover effect */
+    padding: 5px;
+    background-color: #ddd;
 }
 
 .remove-button {
@@ -116,53 +114,33 @@ button:hover {
     transition: color 0.3s ease;
     position: absolute;
     top: 50%;
-    right: 5px; /* Adjust the right position */
+    right: 5px;
     transform: translateY(-50%);
-    font-size: 14px; /* Adjust font size */
-    line-height: 1; /* Ensure the button is vertically centered */
+    font-size: 14px;
+    line-height: 1;
 }
 
 .remove-button:hover {
-    padding: 5px; /* Increase padding for hover effect */
-    background-color: #f8d7da; /* Change background color for hover effect */
+    padding: 5px;
+    background-color: #f8d7da;
 }
 
 /* History container styles */
 .history-container {
-    max-width: 300px;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.history-container h2 {
-    margin-bottom: 10px;
-    color: #007bff;
-}
-
-#historyList {
-    list-style-type: none;
-    padding: 0;
-}
-
-.history-item {
-    margin-bottom: 5px;
-}
-
-.clear-button {
-    padding: 10px 20px;
-    background-color: #dc3545;
-    color: #fff;
-    border: none;
+    max-height: 200px;
+    overflow-y: auto;
+    padding: 10px;
     border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    display: block;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin-top: 20px;
 }
 
-.clear-button:hover {
-    background-color: #c82333;
+.history-record {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+    cursor: pointer;
 }

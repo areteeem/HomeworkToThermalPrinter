@@ -1,18 +1,14 @@
-// Function to submit homework
 function submitHomework() {
-    // Get form elements
     var form = document.getElementById('homeworkForm');
     var classInput = form.elements['class'].value;
     var taskInput = form.elements['task'].value;
 
-    // Display homework
     displayHomework(classInput, taskInput);
 
-    // Reset form
     form.reset();
 }
 
-// Function to display homework
+
 function displayHomework(classInput, taskInput) {
     var outputDiv = document.getElementById('output');
     if (!outputDiv) {
@@ -35,8 +31,23 @@ function displayHomework(classInput, taskInput) {
     taskDescription.classList.add('task-description');
     taskDescription.textContent = taskInput;
 
+    var removeButton = document.createElement('button');
+    removeButton.classList.add('remove-button');
+    removeButton.innerHTML = '&times;';
+    removeButton.onclick = function () {
+        homeworkRecord.remove();
+    };
+
     taskContainer.appendChild(squarePlaceholder);
     taskContainer.appendChild(taskDescription);
+    taskContainer.appendChild(removeButton);
+
+    if (outputDiv.childNodes.length === 0) {
+        var dateParagraph = document.createElement('p');
+        dateParagraph.classList.add('date-paragraph');
+        dateParagraph.innerHTML = '<em>Date: ' + new Date().toLocaleDateString('en-US') + '</em>';
+        outputDiv.appendChild(dateParagraph);
+    }
 
     homeworkRecord.innerHTML = '<p class="class-description">Class: <strong>' + classInput + '</strong></p>';
     homeworkRecord.appendChild(taskContainer);
@@ -44,33 +55,50 @@ function displayHomework(classInput, taskInput) {
     outputDiv.appendChild(homeworkRecord);
 }
 
-// Function to print homework list
+
 function printHomeworkList() {
     var printWindow = window.open('', '_blank');
     var homeworkListContent = document.getElementById('output').innerHTML;
+    var currentDate = new Date().toLocaleDateString('en-US');
+
     printWindow.document.write('<html><head><title>Homework List</title>');
-    printWindow.document.write('<link rel="stylesheet" href="styles.css">'); // Include CSS for print page
+    printWindow.document.write('<link rel="stylesheet" href="styles.css">');
     printWindow.document.write('</head><body>');
     printWindow.document.write('<h2>Homework List</h2>');
+    printWindow.document.write('<p>Date: ' + currentDate + '</p>');
     printWindow.document.write('<div>' + homeworkListContent + '</div>');
     printWindow.document.write('</body></html>');
     printWindow.document.close();
     printWindow.print();
 
-    // Add homework list to history
+
     addHistory(homeworkListContent);
 }
 
-// Function to add homework list to history
+
+
 function addHistory(homeworkListContent) {
     var historyList = document.getElementById('historyList');
-    var historyItem = document.createElement('li');
+    var historyItem = document.createElement('div');
     historyItem.classList.add('history-item');
+
+
     historyItem.innerHTML = homeworkListContent;
+
+
+    var removeButton = document.createElement('button');
+    removeButton.classList.add('remove-button');
+    removeButton.innerHTML = '&times;';
+    removeButton.onclick = function () {
+        historyItem.remove();
+    };
+    historyItem.appendChild(removeButton);
+
+
     historyList.appendChild(historyItem);
 }
 
-// Function to clear history
+
 function clearHistory() {
     var historyList = document.getElementById('historyList');
     historyList.innerHTML = '';
