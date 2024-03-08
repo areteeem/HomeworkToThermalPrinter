@@ -13,7 +13,7 @@ body {
 
 /* Container styles */
 .container {
-    max-width: 800px;
+    max-width: 500px;
     margin: 50px auto;
     padding: 20px;
     background-color: #fff;
@@ -48,6 +48,7 @@ input[type="text"] {
 
 /* Button styles */
 button {
+    width: 100%; /* Take full width */
     padding: 10px 20px;
     background-color: #007bff;
     color: #fff;
@@ -55,7 +56,11 @@ button {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    margin-bottom: 10px;
+    margin-bottom: 10px; /* Add vertical spacing */
+}
+
+button:last-child {
+    margin-bottom: 20px; /* Add extra spacing below the last button */
 }
 
 button:hover {
@@ -128,12 +133,18 @@ button:hover {
 /* History container styles */
 .history-container {
     max-height: 200px;
+    max-width: 200px;
     overflow-y: auto;
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 10px;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-top: 20px;
+    margin: 20px auto;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    -webkit-border-radius: 10px;
 }
 
 .history-record {
